@@ -1,3 +1,16 @@
+const sum = (a,b) => {
+    return a + b
+}
+
+
+console.log(sum(7,3));
+
+let oneEuroIs = {
+    "JPY": 127.9, // japan yen
+    "USD": 1.2, // us dollar
+    "GBP": 0.8, // british pound
+};
+
 // we declare the function with the exact name "fromEuroToDollar"
 const fromEuroToDollar = function(valueInEuro){
     // convert the given valueInEuro to dollars
@@ -6,33 +19,17 @@ const fromEuroToDollar = function(valueInEuro){
     return valueInDollar;
 }
 
-
-function fromDollarToYen (valueIndollar) {
-    //Convertir de Dollar a Yen
-    let valueInyen = (valueInDollar/=valueInEuro) * 127.9; //Obtener el valor del dolar, equivalente del euro
-
-    return valueInyen;
-} 
-
-function fromYenToPound (valueInYenes) {
-    
-    let valueInyen = (valueInDollar/=valueInEuro) * 127.9; 
-
-    return valueInyen;
-} 
-
-
-// esta es mi función que suma dos números
-const sum = (a,b) => {
-    return a + b
+function fromDollarToYen(valueIndollar) {
+    let dollarToEuro = valueIndollar /= oneEuroIs.USD;
+    let dollarToYen =  dollarToEuro *= oneEuroIs.JPY
+    return Number(dollarToEuro.toFixed(1));
 }
 
-// solo un registro en consola para nosotros.
-console.log(7,3)
 
-// exporta la función para usarla en otros archivos 
-// (similar a la palabra clave `export` cuando se usa webpack)
-module.exports = { sum, fromEuroToDollar };
-
-console.log(sum(7,3));
- 
+function fromYanToPound(valueInYan) {
+    let yenToEuro = valueInYan /= oneEuroIs.JPY;
+    let yenToPound = yenToEuro *= oneEuroIs.GBP;
+    return Number(yenToPound.toFixed(2));
+}
+console.log(fromYanToPound(1000))
+module.exports = { sum, fromEuroToDollar, fromDollarToYen, fromYanToPound }
